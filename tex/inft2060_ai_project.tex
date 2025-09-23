@@ -1,0 +1,36 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0.36,0.54,0.66}
+\definecolor{string}{rgb}{0.57,0.64,0.49}
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,                 % <-- added to enable Python syntax highlighting
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keyword}\bfseries,
+    stringstyle=\color{string},
+    commentstyle=\color{green!50!black}, % optional: color comments
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    showstringspaces=false
+}
+
+\title{Network Security Assignment 2}
+\author{Til Naumann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
