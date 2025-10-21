@@ -1,9 +1,11 @@
 *.zip
 *.odt
-./.vs
+/.vs/
 *.aux
 *.fdb_latexmk
 *.fls
 *.log
 *.toc
-./trashnet
+*.pdf
+trashnet/
+*.synctex.gz
