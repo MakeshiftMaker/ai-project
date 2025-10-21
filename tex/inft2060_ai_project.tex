@@ -43,20 +43,15 @@
 \section*{Executive Summary}
 \addcontentsline{toc}{section}{Executive Summary}
 
-This report investigates the capabilities and applications of {CLIP (Contrastive Language–Image Pretraining)}, 
-a multimodal deep learning model developed by OpenAI in 2021. CLIP represents a major advancement in artificial intelligence by connecting visual and textual understanding within a single framework. 
-Trained on hundreds of millions of image–text pairs, the model can recognize, describe, and relate images to language without task-specific fine-tuning — a process known as \textit{zero-shot learning}.
+This report explores the capabilities and real-world adaptability of CLIP (Contrastive Language–Image Pretraining), a multimodal deep learning model developed by OpenAI in 2021. CLIP stands out for its ability to connect visual and textual understanding, learning from hundreds of millions of image–text pairs to recognize and describe new concepts without additional task-specific training. By testing it in two very different contexts, this project examines how far such general intelligence can go when applied to real challenges.
 
-The project aims to explore CLIP’s architecture, underlying principles, and its potential use across different industries. 
-Two domains were selected to demonstrate its flexibility and real-world relevance: 
-(1) the {healthcare industry}, where CLIP is applied to brain MRI scans to assess its ability to distinguish normal images from those showing tumors; and 
-(2) the {e-commerce sector}, where the model is evaluated in image–text retrieval scenarios to improve product search and recommendation systems. 
+The first case study focuses on the healthcare domain, where CLIP was used to classify brain MRI scans and detect the presence of tumors. Using CLIP’s vision encoder as a frozen feature extractor and training a lightweight neural classifier on top, the model achieved a striking 96.99% accuracy. This demonstrated CLIP’s ability to capture complex visual patterns even in specialized medical imagery, where precision and reliability are critical.
 
-The experimental evaluation assesses CLIP’s performance in both contexts using small, curated datasets and relevant performance metrics such as accuracy, cosine similarity, and retrieval precision. 
-The findings highlight the model’s impressive capacity to generalize across visual domains, but also expose its limitations, particularly when applied to specialized data such as medical imagery.
+The second case applies the same approach to the sustainability domain, using the TrashNet dataset to categorize images of waste into classes such as paper, plastic, glass, metal, and cardboard. Despite the visual diversity and noise in this real-world dataset, CLIP achieved an accuracy of 92%, showing strong generalization across a completely different domain. The dataset was too large to include in the GitHub repository (3.5 GB), but remains accessible through external sources for reproducibility.
 
-Overall, this report emphasizes CLIP’s potential to bridge the gap between computer vision and natural language processing. 
-While its versatility makes it valuable across many industries, responsible use and domain-specific fine-tuning remain essential to ensure accuracy, fairness, and ethical deployment.
+Both implementations followed the same methodology: extracting image features with CLIP’s pre-trained vision transformer and training a compact classifier to adapt to domain-specific categories. Through iterative testing and model tuning, the results revealed how CLIP’s transfer learning capabilities can bridge tasks ranging from medical diagnostics to environmental sustainability.
+
+Ultimately, this project highlights CLIP’s strength not only as a model, but as a foundation for applied intelligence — one that learns to see and understand in a way that feels closer to human reasoning. Yet, it also reminds us that accuracy alone is not the full measure of progress: the true challenge lies in how responsibly and meaningfully we choose to apply such technology.
 \newpage
 
 \section{Introduction}
