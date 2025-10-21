@@ -29,6 +29,9 @@
 \author{Til Naumann, Esther LE ROI, Maria GHOCH}
 \date{\today}
 
+\usepackage{setspace}  
+\setstretch{1.7} 
+
 \begin{document}
 
 \maketitle
@@ -37,7 +40,37 @@
 \tableofcontents
 \newpage
 
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+This report investigates the capabilities and applications of {CLIP (Contrastive Language–Image Pretraining)}, 
+a multimodal deep learning model developed by OpenAI in 2021. CLIP represents a major advancement in artificial intelligence by connecting visual and textual understanding within a single framework. 
+Trained on hundreds of millions of image–text pairs, the model can recognize, describe, and relate images to language without task-specific fine-tuning — a process known as \textit{zero-shot learning}.
+
+The project aims to explore CLIP’s architecture, underlying principles, and its potential use across different industries. 
+Two domains were selected to demonstrate its flexibility and real-world relevance: 
+(1) the {healthcare industry}, where CLIP is applied to brain MRI scans to assess its ability to distinguish normal images from those showing tumors; and 
+(2) the {e-commerce sector}, where the model is evaluated in image–text retrieval scenarios to improve product search and recommendation systems. 
+
+The experimental evaluation assesses CLIP’s performance in both contexts using small, curated datasets and relevant performance metrics such as accuracy, cosine similarity, and retrieval precision. 
+The findings highlight the model’s impressive capacity to generalize across visual domains, but also expose its limitations, particularly when applied to specialized data such as medical imagery.
+
+Overall, this report emphasizes CLIP’s potential to bridge the gap between computer vision and natural language processing. 
+While its versatility makes it valuable across many industries, responsible use and domain-specific fine-tuning remain essential to ensure accuracy, fairness, and ethical deployment.
+\newpage
+
 \section{Introduction}
-this is a test section 
+In recent years, artificial intelligence has made significant progress with the rise of multimodal models. These models are systems that can understand and connect different types of data such as text, images, and audio. This ability to interpret information across multiple modalities has opened new opportunities for AI applications in diverse sectors, from healthcare to creative industries.
+
+Developed by OpenAI in 2021, CLIP (Contrastive Language–Image Pretraining) represents an important breakthrough in this field. What is interesting about CLIP (Contrastive Language–Image Pretraining) is that unlike traditional image recognition models, it learns to link visual and textual representations by training on millions of (image, text) pairs collected from the internet. As a result, it learns by comparing correct and incorrect pairs since it can understand visual concepts described in natural language, rather than just relying on predefined labels. This enables CLIP to perform complex tasks such as zero-shot classification, image–text retrieval, and visual captioning, without requiring additional fine-tuning for each new dataset.
+
+The purpose of this project is to analyze in depth the architecture, capabilities, and performance of CLIP, and to evaluate its potential impact across different industries. We selected two very different domains for this study:
+•	Healthcare, through a scenario involving the detection of brain tumors from MRI scans paired with textual descriptions. Medical imaging generates vast amounts of visual data that require precise interpretation, and models like CLIP can assist radiologists. By linking textual medical reports with corresponding scans. It’s ability to understand the relationship between diagnosis and MRI images could support diagnostic accuracy and enable faster triage thus facilitating medical evaluation.
+
+(A second domain to be confirmed — for instance, e-commerce, art and culture, or content moderation.)
+
+Through practical experimentation, this report seeks to explore how CLIP can truly make a difference when used as a visual search or decision-support tool. Beyond measuring its technical performance, the goal is to understand its real potential. By testing it ourselves, we hope to understand how such a model could support real human decisions and not just process data. The aim is to uncover both its strengths and its flaws. The analysis will discuss the model’s experimental performance, its strengths and limitations, and the ethical and technical challenges associated with applying CLIP in real-world environments.
+
+
 
 \end{document}
