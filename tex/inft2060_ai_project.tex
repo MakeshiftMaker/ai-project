@@ -5,6 +5,8 @@
 \usepackage{tcolorbox}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{float}
+
 
 
 \definecolor{codebg}{rgb}{0.95,0.95,0.95}
@@ -102,7 +104,51 @@ Ultimately, CLIP demonstrates that the boundary between “general” and “app
 \section{Experimental Evaluation}
 
 \subsection{Evaluation Methodology}
-Describe the experimental setup, evaluation criteria, and performance metrics.
+To evaluate the performance and robustness of our model, we monitored both training and validation loss across multiple epochs.
+Our primary metrics included : 
+\begin{itemize}
+    \item \textbf{Accuracy} on the validation set 
+    \item \textbf{Training vs. Validation Loss } curves to assess convergence and overfitting.
+\end{itemize}
+
+The model used the Vit-B/32 architecture (pretrained on OpenAI CLIP) and was fine-tuned on our dataset for image classification.
+Since both moodels already achieved an accuracy of 90\%, our focus was not on improving accuracy but rather on analazing the robustness and generalization of the model.
+
+\begin{table}[H]
+\centering
+\caption{Evaluation Metrics Overview}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Metrics} & \textbf{Description} & \textbf{Purpose}\\ \hline
+Training Loss & Average Loss on training data per epoch & To monitor convergence \\ \hline
+Validation loss & Average Loss on unseen validation data & To detect overfitting or underfitting \\ \hline
+Accuracy (\%) & Correct predictions / total samples & To measure model performance \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Initial Observations and Overfitting Detection}
+In the first training runs (500 epochs, learning rate = 1e-3, weight decay = 1e-4), the training loss continuously decreased, while the validation loss started to increase after approximately 100 epochs.
+This divergence indicates \textbf{overfitting} - the model memorizes the training data rather than learning to generalize.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{loss_curve_before1.jpeg}
+\caption{Training vs Validation Loss before fine-tuning. The validation loss increases after $\sim$100 epochs, indicating overfitting.}
+\label{fig:loss_before}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{loss_curve_before2.jpeg}
+\caption{Training vs Validation Loss after fine-tuning. Both losses decrease together and stabilize, showing improved robustness.}
+\label{fig:loss_after}
+\end{figure}
+
+As shown in Figure~\ref{fig:loss_after}, both curves converge smoothly with minimal divergence, 
+indicating that the modified model achieves a better bias–variance balance. 
+Compared to the first configuration, the validation loss remains stable across epochs, 
+demonstrating improved robustness and reduced overfitting.
 
 \subsection{Results and Analysis}
 Present the experimental results with appropriate tables, figures, and explanations.
@@ -114,10 +160,7 @@ Interpret the findings and connect them to the model’s intended purpose or hyp
 % Advantages and Limitations
 % ==============================
 
-% ==============================
-% Future Directions and Conclusion
-% ==============================
-\section{Future Directions and Conclusion}
+
 \section{Advantages and Limitations}
 
 After running our experiments and observing the behaviour of the ViT-B/32 visual encoder pre-trained by OpenAI within the CLIP framework, we began to understand both its potential and its boundaries. The model proved capable of producing high-quality feature representations without any fine-tuning, achieving strong performance across two completely different datasets. This showed that large-scale pretraining on diverse internet data can create features that remain meaningful even in domains far from the original training distribution.
@@ -144,11 +187,11 @@ Overall, the ViT-B/32 encoder from CLIP demonstrated that general intelligence c
 
 In short, ViT-B/32 gave us a glimpse of how multimodal pretraining can be transformed into practical, accessible tools. It showed that powerful intelligence can be borrowed — but understanding, context, and accountability still have to come from us.
 
-\subsection{Future Work}
-Identify future research opportunities, emerging challenges, or improvements for the model.
+% ==============================
+% Future Directions and Conclusion
+% ==============================
+\section{Future Directions and Conclusion}
 
-\subsection{Conclusion}
-Summarize the main insights and conclusions drawn from your investigation.
 
 % ==============================
 % List of References
