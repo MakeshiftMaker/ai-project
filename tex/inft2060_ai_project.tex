@@ -82,7 +82,7 @@ Looking back, we realize our project wasn’t just about testing CLIP’s accura
 \section{Applications and Impact}
 
 \subsection{Applications in Different Domains}
-CLIP’s flexibility allows it to cross the boundaries of traditional AI specialisation, making it applicable to domains as different as medicine and environmental sustainability. In the healthcare setting, our experiment with brain MRI scans showed how CLIP can serve as a diagnostic assistant. By extracting high-level visual features that correspond to tumour shapes, textures, and densities, the model helps identify abnormalities that might be subtle to the human eye. Although it does not replace medical expertise, it can act as a rapid triage tool—highlighting scans that warrant further attention, reducing workload, and supporting more consistent early detection.  
+CLIP’s flexibility allows it to cross the boundaries of traditional AI specialisation, making it applicable to domains as different as medicine and environmental sustainability. In the healthcare setting, our experiment with brain MRI scans showed how CLIP can serve as a diagnostic assistant. By extracting high-level visual features that correspond to tumour shapes, textures, and densities, the model helps identify abnormalities that might be subtle to the human eye. Although it does not replace medical expertise, it can act as a rapid triage tool; highlighting scans that warrant further attention, reducing workload, and supporting more consistent early detection.  
 \vspace{0.3em}
 
 In contrast, the TrashNet implementation demonstrates CLIP’s usefulness for environmental technology. Waste sorting remains one of the bottlenecks of effective recycling systems, where human error or lack of infrastructure often leads to contamination. CLIP’s pretrained visual knowledge enables automatic classification of recyclable materials, even when lighting, angle, or texture vary across images. Such models could be embedded in smart-city waste stations, mobile recycling apps, or industrial conveyor cameras to automate and improve sorting accuracy.  
@@ -96,7 +96,6 @@ The broader implications of models like CLIP extend well beyond technical perfor
 
 From a societal perspective, CLIP’s transferability raises both opportunities and responsibilities. Its ability to generalize across tasks may democratize access to advanced AI, empowering smaller institutions to implement intelligent systems. However, its pre-training on web-scale data also carries biases that may inadvertently propagate into sensitive domains such as healthcare diagnostics or environmental policy. Responsible deployment therefore requires domain validation, transparency in decision processes, and continual human oversight.  
 \vspace{0.3em}
-
 Ultimately, CLIP demonstrates that the boundary between “general” and “applied” intelligence is shrinking. The same architecture that interprets memes and product images online can, with minimal adaptation, support life-saving diagnostics or global sustainability goals. Its impact on industry will depend not only on how efficiently it performs but on how consciously it is integrated into systems that serve human and environmental well-being.
 % ==============================
 % Experimental Evaluation
@@ -104,10 +103,11 @@ Ultimately, CLIP demonstrates that the boundary between “general” and “app
 \subsection{Model Adjustment and Robustness Improvement}
 
 To further test the robustness and adaptability of the ViT-B/32 model, we evaluated its behavior on two distinct datasets: 
-a medical dataset for \textbf{brain tumor classification} and a non-medical dataset for \textbf{trash image classification}. 
+a medical dataset for brain tumor classification and a non-medical dataset for trash image classification. 
 Both experiments aimed to analyze the model’s generalization capacity under very different visual and contextual conditions.
 For each dataset, the same training configuration was initially applied (learning rate = 1e-3, weight decay = 1e-4, dropout = 0.3, 500 epochs). 
 We then introduced the same set of fine-tuning strategies across both tasks:
+
 
 \begin{itemize}
     \item \textbf{Batch Normalization} to stabilize activations and improve convergence.
@@ -138,16 +138,13 @@ This behavior can be attributed to the limited size of the medical dataset,
 which makes it easier for the model to memorize patterns instead of generalizing perfectly. 
 The fine-tuning adjustments helped mitigate this issue but did not fully eliminate the small divergence between training and validation losses.
 
----
-
 \subsection{Results on Trash Classification Dataset}
 
 When applied to the \textit{trash classification} dataset, 
 the model initially exhibited strong overfitting. 
 As seen in Figure~\ref{fig:trash_loss}, 
 the validation loss increased sharply after the first 100 epochs, 
-while the training loss continued to decrease almost to zero — 
-a clear indicator of memorization and weak robustness.
+while the training loss continued to decrease almost to zero, a clear indicator of memorization and weak robustness.
 
 \begin{figure}[H]
 \centering
@@ -162,7 +159,6 @@ After applying the same fine-tuning adjustments (batch normalization, dropout = 
 the model achieved more stable training dynamics and reduced the gap between training and validation losses. 
 The accuracy remained around 90\%, but the model became more resistant to overfitting across both datasets.
 
----
 
 \subsection{Discussion}
 
@@ -185,20 +181,20 @@ which highlights its robustness as a transferable vision backbone.
 After running our experiments and observing the behaviour of the ViT-B/32 visual encoder pre-trained by OpenAI within the CLIP framework, we began to understand both its potential and its boundaries. The model proved capable of producing high-quality feature representations without any fine-tuning, achieving strong performance across two completely different datasets. This showed that large-scale pretraining on diverse internet data can create features that remain meaningful even in domains far from the original training distribution.
 
 \subsection{Strengths}
-The first and most notable advantage of the ViT-B/32 encoder is its \textbf{transferability}. Although originally trained as part of CLIP to align images with text, its visual backbone alone retained a remarkable ability to generalize across domains. We were able to use it directly on medical MRI scans and waste classification images without retraining or modifying the architecture. This flexibility is what makes it an excellent foundation for applied AI projects, where access to large, labeled datasets is limited.
+The first and most notable advantage of the ViT-B/32 encoder is its transferability. Although originally trained as part of CLIP to align images with text, its visual backbone alone retained a remarkable ability to generalize across domains. We were able to use it directly on medical MRI scans and waste classification images without retraining or modifying the architecture. This flexibility is what makes it an excellent foundation for applied AI projects, where access to large, labeled datasets is limited.
 
-Another major strength is \textbf{efficiency}. Because we froze the ViT-B/32 encoder, training focused only on the lightweight classifier. This drastically reduced computational cost and time. The network converged smoothly within 500 epochs and achieved accuracies comparable to models that require full retraining. For small research teams or organizations with modest hardware, this makes transfer learning practical and accessible.
+Another major strength is efficiency. Because we froze the ViT-B/32 encoder, training focused only on the lightweight classifier. This drastically reduced computational cost and time. The network converged smoothly within 500 epochs and achieved accuracies comparable to models that require full retraining. For small research teams or organizations with modest hardware, this makes transfer learning practical and accessible.
 
-The model also demonstrated strong \textbf{robustness}. Its embeddings captured high-level semantic features instead of shallow pixel-based patterns, allowing the classifier to perform well even on noisy or inconsistent data such as the TrashNet images. This semantic richness likely comes from CLIP’s multimodal pretraining, which exposes the vision encoder to diverse visual concepts tied to language. As a result, ViT-B/32 “understands” objects conceptually rather than memorizing textures or shapes.
+The model also demonstrated strong robustness. Its embeddings captured high-level semantic features instead of shallow pixel-based patterns, allowing the classifier to perform well even on noisy or inconsistent data such as the TrashNet images. This semantic richness likely comes from CLIP’s multimodal pretraining, which exposes the vision encoder to diverse visual concepts tied to language. As a result, ViT-B/32 “understands” objects conceptually rather than memorizing textures or shapes.
 
-Lastly, a conceptual advantage lies in its \textbf{connection to language understanding}. Even though we only used the visual side of CLIP, the full architecture is multimodal by design. This means that future work could incorporate textual prompts or descriptions to guide classification — a capability that traditional vision models lack entirely. The potential for cross-modal reasoning represents a new and more human-like form of perception.
+Lastly, a conceptual advantage lies in its connection to language understanding. Even though we only used the visual side of CLIP, the full architecture is multimodal by design. This means that future work could incorporate textual prompts or descriptions to guide classification — a capability that traditional vision models lack entirely. The potential for cross-modal reasoning represents a new and more human-like form of perception.
 
 \subsection{Limitations and Ethical Considerations}
-Despite its performance, the ViT-B/32 encoder also has clear limitations. The first is the \textbf{lack of domain adaptation}. Because the encoder remained frozen, it couldn’t adjust to subtle distinctions within classes, such as similar tumour textures or visually close materials like paper and cardboard. Fine-tuning the vision transformer could improve this, but would require significant computing power and careful dataset design.
+Despite its performance, the ViT-B/32 encoder also has clear limitations. The first is the lack of domain adaptation. Because the encoder remained frozen, it couldn’t adjust to subtle distinctions within classes, such as similar tumour textures or visually close materials like paper and cardboard. Fine-tuning the vision transformer could improve this, but would require significant computing power and careful dataset design.
 
-Another limitation involves \textbf{bias and transparency}. The model inherits all the biases present in the massive, web-based dataset used during its pretraining. These biases are not visible in the code but can affect performance, especially in sensitive fields like healthcare. A misclassification in this context could have serious consequences, highlighting the importance of human supervision. Moreover, like most deep learning systems, the ViT-B/32 encoder operates as a \textit{black box}: it provides excellent results, but the reasoning behind its decisions is hard to explain.
+Another limitation involves bias and transparency. The model inherits all the biases present in the massive, web-based dataset used during its pretraining. These biases are not visible in the code but can affect performance, especially in sensitive fields like healthcare. A misclassification in this context could have serious consequences, highlighting the importance of human supervision. Moreover, like most deep learning systems, the ViT-B/32 encoder operates as a \textit{black box}: it provides excellent results, but the reasoning behind its decisions is hard to explain.
 
-Ethical considerations also extend to \textbf{data provenance and privacy}. Because CLIP was trained on publicly scraped data, questions remain about data ownership, copyright, and consent. If similar models were to be fine-tuned on private datasets such as patient scans, strong privacy protocols and transparent governance would be essential.
+Ethical considerations also extend to data provenance and privacy. Because CLIP was trained on publicly scraped data, questions remain about data ownership, copyright, and consent. If similar models were to be fine-tuned on private datasets such as patient scans, strong privacy protocols and transparent governance would be essential.
 
 \subsection{Reflection}
 Overall, the ViT-B/32 encoder from CLIP demonstrated that general intelligence can be repurposed effectively for narrow, domain-specific tasks. It offered high accuracy, fast training, and strong generalization without the need for complex retraining. Yet, its limitations remind us that performance alone is not enough — responsible AI requires interpretability, ethical awareness, and continuous evaluation.  
@@ -214,21 +210,21 @@ In short, ViT-B/32 gave us a glimpse of how multimodal pretraining can be transf
 \subsection{Future Directions}
 Our experiments with CLIP proved that a single pre-trained vision encoder can adapt impressively to different domains---from medical imaging to environmental sustainability. Yet, what we achieved feels more like a beginning than an end. There are several paths we would like to explore to push this work further, both technically and conceptually.
 
-One clear next step would be to \textbf{unfreeze parts of CLIP’s architecture} and fine-tune the vision encoder on our datasets. In our current setup, the backbone was kept frozen to save computation time and prevent overfitting, but this also limited the model’s ability to learn finer domain-specific details, such as subtle tumour textures or variations in recycled materials. Allowing the model to adapt its internal representations could improve precision and robustness, especially when facing images that differ from its original internet-based training data.
+One clear next step would be to unfreeze parts of CLIP’s architecture and fine-tune the vision encoder on our datasets. In our current setup, the backbone was kept frozen to save computation time and prevent overfitting, but this also limited the model’s ability to learn finer domain-specific details, such as subtle tumour textures or variations in recycled materials. Allowing the model to adapt its internal representations could improve precision and robustness, especially when facing images that differ from its original internet-based training data.
 
-Another direction would be to \textbf{reintroduce CLIP’s text encoder} and experiment with \textbf{prompt-based learning}. By using textual descriptions like \textit{`a brain MRI showing a malignant tumour''} or \textit{`an image of plastic waste''}, we could allow CLIP’s multimodal nature to operate fully---aligning visual recognition with linguistic context. This could make predictions more interpretable and could potentially reduce the need for labeled data, especially in specialized domains such as healthcare.
+Another direction would be to reintroduce CLIP’s text encoder and experiment with prompt-based learning. By using textual descriptions like \textit{`a brain MRI showing a malignant tumour''} or \textit{`an image of plastic waste''}, we could allow CLIP’s multimodal nature to operate fully---aligning visual recognition with linguistic context. This could make predictions more interpretable and could potentially reduce the need for labeled data, especially in specialized domains such as healthcare.
 
-We also see potential in expanding our datasets and experimenting with \textbf{data augmentation} or \textbf{cross-domain transfer}. For instance, training on additional medical imagery or more diverse waste datasets could test CLIP’s generalization limits. On a larger scale, the integration of models such as \textbf{BLIP-2}, \textbf{GPT-4V}, or \textbf{Gemini}---which combine visual, textual, and even auditory inputs---could take multimodal reasoning a step further, bridging perception and understanding even more seamlessly.
+We also see potential in expanding our datasets and experimenting with data augmentation or cross-domain transfer. For instance, training on additional medical imagery or more diverse waste datasets could test CLIP’s generalization limits. On a larger scale, the integration of models such as \textbf{BLIP-2}, \textbf{GPT-4V}, or \textbf{Gemini}---which combine visual, textual, and even auditory inputs---could take multimodal reasoning a step further, bridging perception and understanding even more seamlessly.
 
-Finally, we believe that the next challenge will not only be improving accuracy, but ensuring \textbf{trust, transparency, and accessibility}. Future work should focus on interpretability tools that help visualize what CLIP ``sees'' when it classifies, as well as ethical evaluation frameworks that address bias and accountability in high-stakes applications. Progress in AI should never be detached from responsibility---both should grow together.
+Finally, we believe that the next challenge will not only be improving accuracy, but ensuring trust, transparency, and accessibility. Future work should focus on interpretability tools that help visualize what CLIP ``sees'' when it classifies, as well as ethical evaluation frameworks that address bias and accountability in high-stakes applications. Progress in AI should never be detached from responsibility---both should grow together.
 
 \subsection{Conclusion}
-This project began with curiosity---a question of how far general intelligence can travel when brought into specific, real-world problems. Through our experiments with CLIP, we discovered that even a frozen model, trained on the vast randomness of the internet, could adapt to tasks as different as \textbf{detecting brain tumours} and \textbf{classifying waste materials}. Achieving \textbf{96.99\% accuracy} in the healthcare domain and \textbf{92\%} in the environmental one, our work demonstrated that a single architecture could move gracefully between worlds that rarely meet: hospitals and recycling bins.
+This project began with curiosity---a question of how far general intelligence can travel when brought into specific, real-world problems. Through our experiments with CLIP, we discovered that even a frozen model, trained on the vast randomness of the internet, could adapt to tasks as different as detecting brain tumours and classifying waste materials. Achieving 96.99\% accuracy in the healthcare domain and 92\% in the environmental one, our work demonstrated that a single architecture could move gracefully between worlds that rarely meet: hospitals and recycling bins.
 
-Beyond the numbers, what we learned most was how collaboration between human understanding and machine generalization can create something meaningful. CLIP became more than a tool---it became a partner in reasoning, one that carried traces of global visual knowledge and translated them into domain-specific insight. In a way, our role was to guide it, to shape its broad intelligence into something more purposeful and tangible.
-But these results also reminded us that \textbf{ethical awareness must grow alongside technical progress}. Models like CLIP inherit the biases of the data they are trained on---data that often reflect the inequalities, stereotypes, and cultural imbalances of the internet. In healthcare, such biases could amplify diagnostic disparities; in environmental applications, they could prioritize certain conditions or waste types over others. Recognizing these risks is not a reason to stop developing AI, but a reason to approach it differently---with transparency, critical evaluation, and human oversight at every stage. True innovation, we realized, does not lie only in improving accuracy, but in ensuring that every improvement respects the people and purposes it serves.
+Beyond the numbers, what we learned most was how collaboration between human understanding and machine generalization can create something meaningful. CLIP became more than a tool, it became a partner in reasoning, one that carried traces of global visual knowledge and translated them into domain-specific insight. In a way, our role was to guide it, to shape its broad intelligence into something more purposeful and tangible.
+But these results also reminded us that ethical awareness must grow alongside technical progress. Models like CLIP inherit the biases of the data they are trained on, data that often reflect the inequalities, stereotypes, and cultural imbalances of the internet. In healthcare, such biases could amplify diagnostic disparities; in environmental applications, they could prioritize certain conditions or waste types over others. Recognizing these risks is not a reason to stop developing AI, but a reason to approach it differently---with transparency, critical evaluation, and human oversight at every stage. True innovation, we realized, does not lie only in improving accuracy, but in ensuring that every improvement respects the people and purposes it serves.
 
-The broader implication of this work is that multimodal AI like CLIP blurs the lines between general and applied intelligence. It shows that adaptability, not specialization, might be the most human quality a model can learn. As students and researchers, we leave this project with a sense of both pride and humility---aware that technology this powerful deserves not only innovation but reflection. The future of AI will not just depend on what it can recognize, but on \textbf{how consciously it learns to see}, and on what we choose to make it recognize---and for what purpose.
+The broader implication of this work is that multimodal AI like CLIP blurs the lines between general and applied intelligence. It shows that adaptability, not specialization, might be the most human quality a model can learn. As students and researchers, we leave this project with a sense of both pride and humility---aware that technology this powerful deserves not only innovation but reflection. The future of AI will not just depend on what it can recognize, but on how consciously it learns to see, and on what we choose to make it recognize---and for what purpose.
 
 % ==============================
 % List of References
